@@ -7,12 +7,8 @@ import os
 import requests
 from time import sleep
 
-# The guys at Johns Hopkins University are not fond of this kind of crawling on their site and might ban the IP
-# Better use Tor/Onion or a SSH tunnel ;)
-PROXY_LIST = {
-    "http": "socks5://127.0.0.1:9150",
-    "https": "socks5://127.0.0.1:9150"
-}
+# OMIM's terms of use apply to this data. For programmatic access, register for the OMIM API:
+# https://www.omim.org/api
 
 # load OMIM db
 genemap2 = []
@@ -47,7 +43,7 @@ for pathway_name in ["insulin signaling", "tryptophan metabolism"] :
                 print "Currently parsing MIM: %s, Gene ID: %s" % (omim_id, gene_id)
                 print url
                 try : 
-                    req = requests.get(url, data=None, proxies=PROXY_LIST, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'})
+                    req = requests.get(url)
                     response = req.text.encode('utf-8')
                     if not "OMIM Error" in response :
                         with open("%s/%s_%s_%s_Allelic_Variants.txt" %(output_folder, gene_id, gene_symbol[gene_id], omim_id), "w") as out_file :

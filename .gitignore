@@ -1,0 +1,11 @@
+*.pyc
+00-All.vcf.gz
+*.log
+.settings
+.project
+.pydevproject
+
+# OMIM files are licensed to the requester and must not be committed
+OMIM/
+*/*_OMIM/
+*/OMIM_gene_*.txt

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+
 # Load genes in Rule-based insulin signaling model
 insulin_signaling_RBA_genes = set()
 with open("./insulin_signaling/genes_in_rule_based_model.txt", "r") as in_model : 
@@ -77,6 +79,7 @@ OMIM_variants = {}
 for pathway_name in ["insulin signaling", "tryptophan metabolism"] :
     pathway_folder = "./%s" % pathway_name.replace(" ", "_")
 
+    if not os.path.exists("%s/OMIM_gene_variants_in_VCF.txt" % pathway_folder) : continue # OMIM steps not run
     with open("%s/OMIM_gene_variants_in_VCF.txt" % pathway_folder, "r") as in_OMIM : 
         for l in in_OMIM.readlines() :
             fields = l.rstrip().split(":")
